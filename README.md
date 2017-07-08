@@ -77,6 +77,8 @@ import {
     - exact: 表示 IndexRoute
     - strict: 絕對 ULR pattern(避免 / 在最後面)
 
+    注意：exact 不能被用在巢狀路由當中，否則會永遠 match 不到
+
     > 沒有定義 path 就會永遠被 render
 
     三種方法可以 render:
@@ -84,6 +86,10 @@ import {
         - component: render Component
         - render: render JSX
         - children: render children, but you can use match parameter in props to avoid be render.
+    
+    注意：若 render 使用 component 又給 inline-function (JSX) 會有 re-mount 問題，因為會被送進 React.createElement 方法當中。
+
+    > children 官方提供一種情境有可能會用到，就在用到 Animate 物件的時候，動畫永遠要 render，但裡面的 Component 不一定會一直需要 render，這種情境就有可能會用到！
 
 - Link：導覽到 URL / {{pathname: '{string}', search: '{string}'}}
     > replace: 會取代目前的瀏覽器記錄！
