@@ -149,3 +149,49 @@ import {
 - 定義在路由 match 到的 Component 中
     - message：提示離開頁面確認的 confirm 頁面
     - when：設定要「出現提示」的 condition
+
+## history 物件
+
+```
+$ npm install history
+```
+
+### usage
+
+```
+// history.js
+import createHistory from 'history/createBrowserHistory';
+const history = createHistory();
+module.exports = history;
+
+
+// App.js
+import React from 'react';
+import {
+    BrowserRouter as Router,
+    Route,
+    withRouter
+} from 'react-router-dom';
+
+
+const HomeComponent = ({ match, location, history }) => (
+    <div>
+        <h1>Home Page.</h1>
+        <button onClick={() => history.push('/')}>Go back to home</button>
+        <button onClick={() => history.replace('/about')}>Go to About page and replace current page history</button>
+        <button onClick={history.goBack}>Go back to previous page</button>
+    </div>
+)
+
+const HomeComponentWithRouter = withRouter(HomeComponent);
+```
+
+### 如果你使用 redux，需要 withRouter 的時候
+
+```
+// This gets around shouldComponentUpdate
+withRouter(connect(...)(MyComponent))
+
+// This does not
+connect(...)(withRouter(MyComponent))
+```
