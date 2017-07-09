@@ -172,8 +172,13 @@ import {
     Route,
     withRouter
 } from 'react-router-dom';
+import history from './history';
 
+// Router setting
+<Router history={history} >
+</Router>
 
+// Match component
 const HomeComponent = ({ match, location, history }) => (
     <div>
         <h1>Home Page.</h1>
@@ -186,7 +191,7 @@ const HomeComponent = ({ match, location, history }) => (
 const HomeComponentWithRouter = withRouter(HomeComponent);
 ```
 
-### 如果你使用 redux，需要 withRouter 的時候
+### 如果你使用 redux，需要 connect 與 withRouter 一起用的時候
 
 ```
 // This gets around shouldComponentUpdate
